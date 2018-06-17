@@ -1,15 +1,12 @@
 package assignment1;
 
-import edu.princeton.cs.algs4.Digraph;
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.*;
 
+@SuppressWarnings("WeakerAccess")
 public class SAP {
 
     private final Digraph G;
 
-    // constructor takes a digraph (not necessarily a DAG)
     public SAP(Digraph G) {
         if (G == null) {
             throw new NullPointerException("Argument should not be null");
@@ -17,7 +14,54 @@ public class SAP {
         this.G = G;
     }
 
-    // do unit testing of this class
+    public int length(int v, int w) {
+        return bfs(v, w)[1];
+    }
+
+    public int ancestor(int v, int w) {
+        return bfs(v, w)[0];
+    }
+
+    public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) {
+            throw new NullPointerException("Argument should not be null");
+        }
+        return bfs(v, w)[1];
+    }
+
+    private Integer[] bfs(int v, int w) {
+        return bfs(new BreadthFirstDirectedPaths(G, v), new BreadthFirstDirectedPaths(G, w));
+    }
+
+    private Integer[] bfs(Iterable<Integer> v, Iterable<Integer> w) {
+        return bfs(new BreadthFirstDirectedPaths(G, v), new BreadthFirstDirectedPaths(G, w));
+    }
+
+    private Integer[] bfs(BreadthFirstDirectedPaths bfs1, BreadthFirstDirectedPaths bfs2) {
+        int minDistance = Integer.MAX_VALUE;
+        int ancestor = 0;
+        for (int i = 0; i < G.V(); i++) {
+            if (bfs1.hasPathTo(i) && bfs2.hasPathTo(i)) {
+                int distance = bfs1.distTo(i) + bfs2.distTo(i);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    ancestor = i;
+                }
+            }
+        }
+        if (minDistance == Integer.MAX_VALUE) {
+            return new Integer[]{-1, -1};
+        }
+        return new Integer[]{ancestor, minDistance};
+    }
+
+    public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) {
+            throw new NullPointerException("Argument should not be null");
+        }
+        return bfs(v, w)[0];
+    }
+
     public static void main(String[] args) {
         In in = new In(args[0]);
         Digraph G = new Digraph(in);
@@ -29,37 +73,5 @@ public class SAP {
             int ancestor = sap.ancestor(v, w);
             StdOut.printf("length = %d, ancestor = %d\n", length, ancestor);
         }
-    }
-
-    // length of shortest ancestral path between v and w; -1 if no such path
-    public int length(int v, int w) {
-        if (v < 0 || v > G.V() - 1 || w < 0 || w > G.V() - 1) {
-            throw new IndexOutOfBoundsException("One of the vertex arguments is invalid");
-        }
-        return 0;
-    }
-
-    // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
-    public int ancestor(int v, int w) {
-        if (v < 0 || v > G.V() - 1 || w < 0 || w > G.V() - 1) {
-            throw new IndexOutOfBoundsException("One of the vertex arguments is invalid");
-        }
-        return 0;
-    }
-
-    // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
-    public int length(Iterable<Integer> v, Iterable<Integer> w) {
-        if (v == null || w == null) {
-            throw new NullPointerException("Argument should not be null");
-        }
-        return 0;
-    }
-
-    // a common ancestor that participates in shortest ancestral path; -1 if no such path
-    public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
-        if (v == null || w == null) {
-            throw new NullPointerException("Argument should not be null");
-        }
-        return 0;
     }
 }
