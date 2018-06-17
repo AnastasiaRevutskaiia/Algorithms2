@@ -17,10 +17,7 @@ public class Outcast {
         for (int i = 0; i < nouns.length; i++) {
             for (int j = i + 1; j < nouns.length; j++) {
                 int distance = wordNet.distance(nouns[i], nouns[j]);
-                System.out.println("Distance = " + distance + " nouns: " + nouns[i] + " & " + nouns[j] + " ancestor: "
-                        + wordNet.sap(nouns[i], nouns[j]));
-                if (distance >= maxDistance) {
-                    System.out.println(true);
+                if (distance > maxDistance) {
                     maxDistance = distance;
                     outCast = nouns[j];
                 }
