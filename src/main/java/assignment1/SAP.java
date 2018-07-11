@@ -2,7 +2,7 @@ package assignment1;
 
 import edu.princeton.cs.algs4.*;
 
-@SuppressWarnings("WeakerAccess")
+
 public class SAP {
 
     private final Digraph G;
@@ -24,20 +24,20 @@ public class SAP {
 
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
         if (v == null || w == null) {
-            throw new NullPointerException("Argument should not be null");
+            throw new IllegalArgumentException("Argument should not be null");
         }
         return bfs(v, w)[1];
     }
 
-    private Integer[] bfs(int v, int w) {
+    private int[] bfs(int v, int w) {
         return bfs(new BreadthFirstDirectedPaths(G, v), new BreadthFirstDirectedPaths(G, w));
     }
 
-    private Integer[] bfs(Iterable<Integer> v, Iterable<Integer> w) {
+    private int[] bfs(Iterable<Integer> v, Iterable<Integer> w) {
         return bfs(new BreadthFirstDirectedPaths(G, v), new BreadthFirstDirectedPaths(G, w));
     }
 
-    private Integer[] bfs(BreadthFirstDirectedPaths bfs1, BreadthFirstDirectedPaths bfs2) {
+    private int[] bfs(BreadthFirstDirectedPaths bfs1, BreadthFirstDirectedPaths bfs2) {
         int minDistance = Integer.MAX_VALUE;
         int ancestor = 0;
         for (int i = 0; i < G.V(); i++) {
@@ -50,14 +50,14 @@ public class SAP {
             }
         }
         if (minDistance == Integer.MAX_VALUE) {
-            return new Integer[]{-1, -1};
+            return new int[]{-1, -1};
         }
-        return new Integer[]{ancestor, minDistance};
+        return new int[]{ancestor, minDistance};
     }
 
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
         if (v == null || w == null) {
-            throw new NullPointerException("Argument should not be null");
+            throw new IllegalArgumentException("Argument should not be null");
         }
         return bfs(v, w)[0];
     }

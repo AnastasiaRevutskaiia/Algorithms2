@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.In;
 
 import java.util.*;
 
-@SuppressWarnings("WeakerAccess")
+
 public class WordNet {
 
     private final Digraph digraph;
@@ -49,12 +49,10 @@ public class WordNet {
         }
     }
 
-    @SuppressWarnings("unused")
     public Iterable<String> nouns() {
         return nouns.keySet();
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isNoun(String word) {
         if (word == null) {
             throw new NullPointerException("Argument should not be null");
@@ -67,7 +65,7 @@ public class WordNet {
             throw new NullPointerException("Argument should not be null");
         }
         if (!isNoun(nounA) || !isNoun(nounB)) {
-            throw new IllegalArgumentException("One of the arguments is not WordNet noun");
+            throw new IllegalArgumentException("One of the arguments is not assignment1.WordNet noun");
         }
         SAP sap = new SAP(digraph);
         return sap.length(numberOf(nounA), numberOf(nounB));
@@ -83,7 +81,7 @@ public class WordNet {
             throw new NullPointerException("Argument should not be null");
         }
         if (!isNoun(nounA) || !isNoun(nounB)) {
-            throw new IllegalArgumentException("One of the arguments is not WordNet noun");
+            throw new IllegalArgumentException("One of the arguments is not assignment1.WordNet noun");
         }
         SAP sap = new SAP(digraph);
         int ancestor = sap.ancestor(numberOf(nounA), numberOf(nounB));
