@@ -14,7 +14,7 @@ public class WordNet {
 
     public WordNet(String synsets, String hypernyms) {
         if (synsets == null || hypernyms == null) {
-            throw new NullPointerException("Argument should not be null");
+            throw new IllegalArgumentException("Argument should not be null");
         }
         In in = new In(synsets);
         while (!in.isEmpty()) {
@@ -54,14 +54,14 @@ public class WordNet {
 
     public boolean isNoun(String word) {
         if (word == null) {
-            throw new NullPointerException("Argument should not be null");
+            throw new IllegalArgumentException("Argument should not be null");
         }
         return nouns.containsKey(word);
     }
 
     public int distance(String nounA, String nounB) {
         if (nounA == null || nounB == null) {
-            throw new NullPointerException("Argument should not be null");
+            throw new IllegalArgumentException("Argument should not be null");
         }
         if (!isNoun(nounA) || !isNoun(nounB)) {
             throw new IllegalArgumentException("One of the arguments is not assignment1.WordNet noun");
@@ -77,7 +77,7 @@ public class WordNet {
 
     public String sap(String nounA, String nounB) {
         if (nounA == null || nounB == null) {
-            throw new NullPointerException("Argument should not be null");
+            throw new IllegalArgumentException("Argument should not be null");
         }
         if (!isNoun(nounA) || !isNoun(nounB)) {
             throw new IllegalArgumentException("One of the arguments is not assignment1.WordNet noun");
