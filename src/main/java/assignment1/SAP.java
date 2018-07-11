@@ -2,7 +2,6 @@ package assignment1;
 
 import edu.princeton.cs.algs4.*;
 
-
 public class SAP {
 
     private final Digraph G;
@@ -11,7 +10,7 @@ public class SAP {
         if (G == null) {
             throw new NullPointerException("Argument should not be null");
         }
-        this.G = G;
+        this.G = new Digraph(G);
     }
 
     public int length(int v, int w) {
