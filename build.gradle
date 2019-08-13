@@ -9,9 +9,9 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven { url 'https://raw.github.com/slok/algs4-mvn-repo/master' }
+    maven { url 'https://dl.bintray.com/algs4/maven' }
 }
 
 dependencies {
-    compile 'edu.princeton.cs.algs4:algs4:1.0'
+    compile 'edu.princeton.cs:algs4:1.0.4'
 }

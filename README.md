@@ -29,5 +29,3 @@ Week 2 - Minimum Spanning Trees and Shortest Paths
  
  Although the [underlying algorithm](https://www.youtube.com/watch?v=6NcIJXTlugc) is simple and elegant, it was not discovered until 2007. Now, it is now a core feature in Adobe Photoshop and other computer graphics applications.
  
- --------------------------------
-Requires the algs4.jar to run, available in Maven repository. See given [**build.gradle**](build.gradle) file.
