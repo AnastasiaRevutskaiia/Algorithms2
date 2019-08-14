@@ -43,7 +43,7 @@ Week 2 - Minimum Spanning Trees and Shortest Paths
   The problem is not as easy as many sports writers would have you believe, in part because the answer depends not only on the number 
   of games won and left to play, but also on the schedule of remaining games. To see the complication, consider the following scenario:
   
-  | i |  team        | wins (`w[i]`) | loss (`l[i]`) | left (`r[i]`) | Atl (`g[i][0]`) | Phi (`g[i][1]`) | NY (`g[i][2]`) | Mon (`g[i][3]`) |
+  | i |  team        | wins | loss | left | Atl | Phi | NY | Mon |
   |:---:| :---:    |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | 0 | Atlanta      | 83   | 71   | 8    | -   | 1   | 6  | 1   |
   | 1 | Philadelphia | 80   | 79   | 3    | 1   | -   | 0  | 2   |
