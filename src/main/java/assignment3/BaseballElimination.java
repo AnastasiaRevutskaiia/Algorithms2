@@ -134,12 +134,17 @@ public class BaseballElimination {
         FordFulkerson fordFulkerson = new FordFulkerson(flowNetwork, s, t);
         Set<String> eliminaters = new HashSet<>();
 
-        for (FlowEdge edge : flowNetwork.adj(t)) {
-            if (fordFulkerson.inCut(edge.from())) {
-                eliminaters.add(teams[edge.from()].getName());
+        for (FlowEdge edge : flowNetwork.adj(s)) {
+            if (edge.flow() != edge.capacity()) {
+                for (FlowEdge edgeTarget : flowNetwork.adj(t)) {
+                    if (fordFulkerson.inCut(edgeTarget.from())) {
+                        eliminaters.add(teams[edgeTarget.from()].getName());
+                    }
+                }
+                return eliminaters;
             }
         }
-        return eliminaters.isEmpty() ? null : eliminaters;
+        return null;
     }
 
     public static void main(String[] args) {
