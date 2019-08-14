@@ -5,7 +5,7 @@ Code for programming assignments in Java from the Coursera course, [Algorithms P
 
 Week 1 - Directed and Undirected Graphs
 --------------------------------
- - [**WordNet.java**](src/main/java/assignment1/WordNet.java) - is a semantic lexicon for the English language that is used extensively by computational linguists 
+ - [**WordNet.java**](src/main/java/assignment1/WordNet.java) - a semantic lexicon for the English language that is used extensively by computational linguists 
  and cognitive scientists; for example, it was a key component in IBM's [Watson](http://en.wikipedia.org/wiki/Watson_(computer)). 
  
  WordNet groups words into sets of synonyms called *synsets* and describes semantic relationships between them. 
@@ -14,7 +14,7 @@ Week 1 - Directed and Undirected Graphs
 
 Week 2 - Minimum Spanning Trees and Shortest Paths
 --------------------------------
- - [**SeamCarver.java**](src/main/java/assignment2/SeamCarver.java) - is a data type that re-sizes a W-by-H image using the seam-carving technique. 
+ - [**SeamCarver.java**](src/main/java/assignment2/SeamCarver.java) - a data type that re-sizes a W-by-H image using the seam-carving technique. 
  
  Seam-carving is a content-aware image resizing technique where the image is reduced in size by one pixel of height (or width) at a time. 
  A vertical seam in an image is a path of pixels connected from the top to the bottom with one pixel in each row; a horizontal seam is a path of pixels connected 
@@ -29,3 +29,30 @@ Week 2 - Minimum Spanning Trees and Shortest Paths
  
  Although the [underlying algorithm](https://www.youtube.com/watch?v=6NcIJXTlugc) is simple and elegant, it was not discovered until 2007. Now, it is now a core feature in Adobe Photoshop and other computer graphics applications.
  
+ Week 3 - Maximum Flow and Minimum Cut
+ --------------------------------
+  - [**BaseballElimination.java**](src/main/java/assignment3/BaseballElimination.java) - a data type that solves baseball elimination problem. 
+  
+  In the [baseball elimination problem](https://en.wikipedia.org/wiki/Maximum_flow_problem#Baseball_elimination), there is a division consisting of `n` teams. 
+  At some point during the season, team `i` has `w[i]` wins, 
+  `l[i]` losses, `r[i]` remaining games, and `g[i][j]` games left to play against team `j`. A team is mathematically eliminated if it cannot 
+  possibly finish the season in (or tied for) first place. The goal is to determine exactly which teams are mathematically eliminated. 
+  For simplicity, we assume that no games end in a tie (as is the case in Major League Baseball) and that there are no rainouts (i.e., 
+  every scheduled game is played).
+  
+  The problem is not as easy as many sports writers would have you believe, in part because the answer depends not only on the number 
+  of games won and left to play, but also on the schedule of remaining games. To see the complication, consider the following scenario:
+  
+  | i |  team        | wins (`w[i]`) | loss (`l[i]`) | left (`r[i]`) | Atl (`g[i][0]`) | Phi (`g[i][1]`) | NY (`g[i][2]`) | Mon (`g[i][3]`) |
+  |:---:| :---:    |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+  | 0 | Atlanta      | 83   | 71   | 8    | -   | 1   | 6  | 1   |
+  | 1 | Philadelphia | 80   | 79   | 3    | 1   | -   | 0  | 2   |
+  | 2 | New York     | 78   | 78   | 6    | 6   | 0   | -  | 0   |
+  | 3 | Montreal     | 77   | 82   | 3    | 1   | 2   | 0  | -   |
+  
+  Montreal is mathematically eliminated since it can finish with at most 80 wins and Atlanta already has 83 wins. 
+  This is the simplest reason for elimination. However, there can be more complicated reasons. For example, Philadelphia 
+  is also mathematically eliminated. It can finish the season with as many as 83 wins, which appears to be enough to tie 
+  Atlanta. But this would require Atlanta to lose all of its remaining games, including the 6 against New York, in which 
+  case New York would finish with 84 wins. We note that New York is not yet mathematically eliminated despite the fact that 
+  it has fewer wins than Philadelphia.
