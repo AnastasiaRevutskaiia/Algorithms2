@@ -56,3 +56,19 @@ Week 2 - Minimum Spanning Trees and Shortest Paths
   Atlanta. But this would require Atlanta to lose all of its remaining games, including the 6 against New York, in which 
   case New York would finish with 84 wins. We note that New York is not yet mathematically eliminated despite the fact that 
   it has fewer wins than Philadelphia.
+  
+Week 4 - Tries and Substring Search
+--------------------------------
+- [**BoggleSolver.java**](src/main/java/assignment4/BoggleSolver.java) - a data type that wins the Boggle word game. 
+    
+ [Boggle](https://en.wikipedia.org/wiki/Boggle) is a word game designed by Allan Turoff and distributed by Hasbro. 
+ It involves a board made up of 16 cubic dice, where each die has a letter printed on each of its 6 sides. 
+ At the beginning of the game, the 16 dice are shaken and randomly distributed into a 4-by-4 tray, with only the top 
+ sides of the dice visible. The player wins if they find all the letter combinations which are the valid words. 
+ See the examples for `pins` and `pines` below.
+ 
+ ![pins][3]     ![pines][4] 
+  
+  [3]: src/main/resources/assignment4/pins.png ("pins")
+  [4]: src/main/resources/assignment4/pines.png ("pines")
+  
