@@ -36,9 +36,6 @@ public class BoggleSolver {
     }
 
     private void buildWords(String currentWord, int row, int col, Set<String> result, boolean[] visited, BoggleBoard board) {
-        if (visited[row * board.cols() + col]) {
-            return;
-        }
         String ch = Character.toString(board.getLetter(row, col));
         String newWord = currentWord + (ch.equals(Q) ? QU : ch);
         if (doWordsWithPrefixNotExist(newWord)) {
@@ -54,7 +51,7 @@ public class BoggleSolver {
                 if (i == row && j == col) {
                     continue;
                 }
-                if (i >= 0 && j >=0 && i < board.rows() && j < board.cols()) {
+                if (i >= 0 && j >=0 && i < board.rows() && j < board.cols() && !visited[i * board.cols() + j]) {
                     buildWords(newWord, i, j, result, visited, board);
                 }
             }
