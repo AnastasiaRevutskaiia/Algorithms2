@@ -25,18 +25,18 @@ public class BoggleSolver {
     // Returns the set of all valid words in the given Boggle board, as an Iterable.
     public Iterable<String> getAllValidWords(BoggleBoard board) {
         Set<String> total = new HashSet<>();
+        boolean[] visited = new boolean[board.rows() * board.cols()];
         for (int i = 0; i < board.rows(); i++) {
             for (int j = 0; j < board.cols(); j++) {
-                Set<String> local = new HashSet<>();
-                buildWords("", i, j, local, new boolean[board.rows() * board.cols()], board);
-                total.addAll(local);
+                buildWords("", i, j, total, visited, board);
+                visited[i * board.cols() + j] = false;
             }
         }
         return total;
     }
 
     private void buildWords(String currentWord, int row, int col, Set<String> result, boolean[] visited, BoggleBoard board) {
-        if (row < 0 || col < 0 || row >= board.rows() || col >= board.cols() || visited[row * board.cols() + col]) {
+        if (visited[row * board.cols() + col]) {
             return;
         }
         String ch = Character.toString(board.getLetter(row, col));
@@ -44,19 +44,22 @@ public class BoggleSolver {
         if (doWordsWithPrefixNotExist(newWord)) {
             return;
         }
-        boolean[] newVisited = Arrays.copyOf(visited, visited.length);
-        newVisited[row * board.cols() + col] = true;
         if (newWord.length() >= 3 && trie.contains(newWord)) {
             result.add(newWord);
         }
-        buildWords(newWord, row + 1, col, result, newVisited, board);
-        buildWords(newWord, row - 1, col, result, newVisited, board);
-        buildWords(newWord, row, col + 1, result, newVisited, board);
-        buildWords(newWord, row, col - 1, result, newVisited, board);
-        buildWords(newWord, row + 1, col + 1, result, newVisited, board);
-        buildWords(newWord, row + 1, col - 1, result, newVisited, board);
-        buildWords(newWord, row - 1, col + 1, result, newVisited, board);
-        buildWords(newWord, row - 1, col - 1, result, newVisited, board);
+
+        visited[row * board.cols() + col] = true;
+        for (int i = row - 1; i <= row + 1; i++) {
+            for (int j = col - 1; j <= col + 1; j++) {
+                if (i == row && j == col) {
+                    continue;
+                }
+                if (i >= 0 && j >=0 && i < board.rows() && j < board.cols()) {
+                    buildWords(newWord, i, j, result, visited, board);
+                }
+            }
+        }
+        visited[row * board.cols() + col] = false;
     }
 
     private boolean doWordsWithPrefixNotExist(String prefix) {
