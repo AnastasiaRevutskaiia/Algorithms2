@@ -2,7 +2,7 @@ package assignment4;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.TrieSET;
+import edu.princeton.cs.algs4.TrieST;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,12 +14,19 @@ public class BoggleSolver {
     private static final String QU = "QU";
     private static final int[] SCORES = {0, 0, 0, 1, 1, 2, 3, 5, 11};
 
-    private final TrieSET trie = new TrieSET();
+    private final TrieST<String> trie = new TrieST<>();
+    private final Set<String> dictionary = new HashSet<>();
 
     // Initializes the data structure using the given array of strings as the dictionary.
     // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
     public BoggleSolver(String[] dictionary) {
-        Arrays.stream(dictionary).forEach(trie::add);
+        Arrays.stream(dictionary)
+                .forEach(word -> {
+                    if (word.length() >= 3) {
+                        trie.put(word, word);
+                        this.dictionary.add(word);
+                    }
+                });
     }
 
     // Returns the set of all valid words in the given Boggle board, as an Iterable.
@@ -28,20 +35,23 @@ public class BoggleSolver {
         boolean[] visited = new boolean[board.rows() * board.cols()];
         for (int i = 0; i < board.rows(); i++) {
             for (int j = 0; j < board.cols(); j++) {
-                buildWords("", i, j, total, visited, board);
+                buildWords("", i, j, total, visited, board, trie);
                 visited[i * board.cols() + j] = false;
             }
         }
         return total;
     }
 
-    private void buildWords(String currentWord, int row, int col, Set<String> result, boolean[] visited, BoggleBoard board) {
+    private void buildWords(String currentWord, int row, int col, Set<String> result, boolean[] visited, BoggleBoard board, TrieST<String> localTrie) {
         String ch = Character.toString(board.getLetter(row, col));
         String newWord = currentWord + (ch.equals(Q) ? QU : ch);
-        if (doWordsWithPrefixNotExist(newWord)) {
-            return;
+        if (newWord.length() >= 3) {
+            localTrie = trieWithPrefix(newWord, localTrie);
+            if (localTrie.isEmpty()) {
+                return;
+            }
         }
-        if (newWord.length() >= 3 && trie.contains(newWord)) {
+        if (newWord.length() >= 3 && dictionary.contains(newWord)) {
             result.add(newWord);
         }
 
@@ -52,21 +62,23 @@ public class BoggleSolver {
                     continue;
                 }
                 if (i >= 0 && j >=0 && i < board.rows() && j < board.cols() && !visited[i * board.cols() + j]) {
-                    buildWords(newWord, i, j, result, visited, board);
+                    buildWords(newWord, i, j, result, visited, board, localTrie);
                 }
             }
         }
         visited[row * board.cols() + col] = false;
     }
 
-    private boolean doWordsWithPrefixNotExist(String prefix) {
-        return !prefix.isEmpty() && !trie.keysWithPrefix(prefix).iterator().hasNext();
+    private TrieST<String> trieWithPrefix(String prefix, TrieST<String> original) {
+        TrieST<String> newTrie = new TrieST<>();
+        original.keysWithPrefix(prefix).forEach(w -> newTrie.put(w, w));
+        return newTrie;
     }
 
     // Returns the score of the given word if it is in the dictionary, zero otherwise.
     // (You can assume the word contains only the uppercase letters A through Z.)
     public int scoreOf(String word) {
-        if (word == null || word.length() < 3 || !trie.contains(word)) {
+        if (word == null || word.length() < 3 || !dictionary.contains(word)) {
             return 0;
         }
         return word.length() >= SCORES.length ? SCORES[8] : SCORES[word.length()];
