@@ -61,7 +61,7 @@ public class BoggleSolver {
                 if (i == row && j == col) {
                     continue;
                 }
-                if (i >= 0 && j >=0 && i < board.rows() && j < board.cols() && !visited[i * board.cols() + j]) {
+                if (i >= 0 && j >= 0 && i < board.rows() && j < board.cols() && !visited[i * board.cols() + j]) {
                     buildWords(newWord, i, j, result, visited, board, localTrie);
                 }
             }
