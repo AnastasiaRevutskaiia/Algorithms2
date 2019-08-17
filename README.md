@@ -60,7 +60,8 @@ Week 2 - Minimum Spanning Trees and Shortest Paths
 Week 4 - Tries and Substring Search
 --------------------------------
 - [**BoggleSolver.java**](src/main/java/assignment4/BoggleSolver.java) - a data type that wins the Boggle word game. 
-    
+- [**Trie.java**](src/main/java/assignment4/Trie.java) - custom trie data structure implementation for optimized search of prefixes in the set of strings.
+
  [Boggle](https://en.wikipedia.org/wiki/Boggle) is a word game designed by Allan Turoff and distributed by Hasbro. 
  It involves a board made up of 16 cubic dice, where each die has a letter printed on each of its 6 sides. 
  At the beginning of the game, the 16 dice are shaken and randomly distributed into a 4-by-4 tray, with only the top 
