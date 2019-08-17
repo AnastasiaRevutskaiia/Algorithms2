@@ -22,7 +22,7 @@ class Trie {
         if (key == null) throw new IllegalArgumentException("argument to get() is null");
         Trie.Node x = get(root, key, 0);
         if (x == null) return null;
-        return  x.val;
+        return x.val;
     }
 
     boolean contains(String key) {
@@ -34,7 +34,7 @@ class Trie {
         if (x == null) return null;
         if (d == key.length()) return x;
         char c = key.charAt(d);
-        return get(x.next[c], key, d+1);
+        return get(x.next[c], key, d + 1);
     }
 
     void put(String key) {
@@ -55,7 +55,7 @@ class Trie {
             return x;
         }
         char c = key.charAt(d);
-        x.next[c] = put(x.next[c], key, val, d+1);
+        x.next[c] = put(x.next[c], key, val, d + 1);
         return x;
     }
 
@@ -99,10 +99,9 @@ class Trie {
         if (d == key.length()) {
             if (x.val != null) n--;
             x.val = null;
-        }
-        else {
+        } else {
             char c = key.charAt(d);
-            x.next[c] = delete(x.next[c], key, d+1);
+            x.next[c] = delete(x.next[c], key, d + 1);
         }
 
         if (x.val != null) return x;
