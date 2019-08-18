@@ -51,8 +51,11 @@ public class BoggleSolver {
         char ch = board.getLetter(row, col);
         visited[row * board.cols() + col] = true;
 
-        // noinspection ConstantConditions
-        Trie.Node x = stack.peek().getNext()[ch];
+        Trie.Node current = stack.peek();
+        if (current == null) {
+            return;
+        }
+        Trie.Node x = current.getNext()[ch];
 
         if (x != null) {
             stack.push(x);
