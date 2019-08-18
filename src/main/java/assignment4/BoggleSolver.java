@@ -19,7 +19,7 @@ public class BoggleSolver {
     private final Set<String> dictionary = new HashSet<>();
 
     // Initializes the data structure using the given array of strings as the dictionary.
-    // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
+    // (We're assuming each word in the dictionary contains only the uppercase letters A through Z.)
     public BoggleSolver(String[] dictionary) {
         Arrays.stream(dictionary)
                 .forEach(word -> {
@@ -45,7 +45,8 @@ public class BoggleSolver {
         return total;
     }
 
-    // dfs search which uses stack of trie nodes for resuming the string search from the point where it stopped for the previous prefix
+    // dfs search which uses stack of trie nodes for resuming the string
+    // search from the point where it stopped the previous prefix search
     private void buildWords(String currentWord, int row, int col, Set<String> result, boolean[] visited,
                             BoggleBoard board, LinkedList<Trie.Node> stack) {
         char ch = board.getLetter(row, col);
@@ -96,7 +97,7 @@ public class BoggleSolver {
     }
 
     // Returns the score of the given word if it is in the dictionary, zero otherwise.
-    // (You can assume the word contains only the uppercase letters A through Z.)
+    // (We're assuming the word contains only the uppercase letters A through Z.)
     public int scoreOf(String word) {
         if (word == null || word.length() < 3 || !dictionary.contains(word)) {
             return 0;
