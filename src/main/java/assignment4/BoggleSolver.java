@@ -3,6 +3,7 @@ package assignment4;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.Objects;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -50,14 +51,14 @@ public class BoggleSolver {
         char ch = board.getLetter(row, col);
         visited[row * board.cols() + col] = true;
 
-        //noinspection ConstantConditions
+        // noinspection ConstantConditions
         Trie.Node x = stack.peek().getNext()[ch];
 
         if (x != null) {
             stack.push(x);
             String newWord = currentWord + ch;
             if (ch == Q) {
-                //noinspection ConstantConditions
+                // noinspection ConstantConditions
                 Trie.Node uNode = stack.peek().getNext()[U];
                 if (uNode == null) {
                     stack.pop();
@@ -103,14 +104,14 @@ public class BoggleSolver {
     public static void main(String[] args) {
         String fileName = args[0];
         System.out.println(args[0]);
-        In in = new In(BoggleSolver.class.getClassLoader()
-                .getResource("assignment4/" + fileName).getFile());
+        In in = new In(Objects.requireNonNull(BoggleSolver.class.getClassLoader()
+                .getResource("assignment4/" + fileName)).getFile());
 
         String[] dictionary = in.readAllStrings();
         BoggleSolver solver = new BoggleSolver(dictionary);
 
-        String boardFile = BoggleSolver.class.getClassLoader()
-                .getResource("assignment4/" + args[1]).getFile();
+        String boardFile = Objects.requireNonNull(BoggleSolver.class.getClassLoader()
+                .getResource("assignment4/" + args[1])).getFile();
         BoggleBoard board = new BoggleBoard(boardFile);
         System.out.println(board);
         int score = 0;

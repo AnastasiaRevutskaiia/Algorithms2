@@ -1,5 +1,6 @@
 package assignment4;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -10,24 +11,24 @@ class Trie {
     private int n;
 
     static class Node {
-        private Integer val;
+        private int val;
         private Trie.Node[] next = new Trie.Node[R];
 
         Node[] getNext() {
-            return next;
+            return Arrays.copyOf(next, next.length);
         }
     }
 
-    Integer get(String key) {
+    int get(String key) {
         if (key == null) throw new IllegalArgumentException("argument to get() is null");
         Trie.Node x = get(root, key, 0);
-        if (x == null) return null;
+        if (x == null) return -1;
         return x.val;
     }
 
     boolean contains(String key) {
         if (key == null) throw new IllegalArgumentException("argument to contains() is null");
-        return get(key) != null;
+        return get(key) != -1;
     }
 
     private Trie.Node get(Trie.Node x, String key, int d) {
@@ -39,7 +40,6 @@ class Trie {
 
     void put(String key) {
         if (key == null) throw new IllegalArgumentException("first argument to put() is null");
-        if (key.length() == 0) delete(key);
         else root = put(root, key, key.length(), 0);
     }
 
@@ -47,10 +47,10 @@ class Trie {
         return root;
     }
 
-    private Trie.Node put(Trie.Node x, String key, Integer val, int d) {
+    private Trie.Node put(Trie.Node x, String key, int val, int d) {
         if (x == null) x = new Trie.Node();
         if (d == key.length()) {
-            if (x.val == null) n++;
+            if (x.val == -1) n++;
             x.val = val;
             return x;
         }
@@ -81,33 +81,13 @@ class Trie {
 
     private void collect(Trie.Node x, StringBuilder prefix, Queue<String> results) {
         if (x == null) return;
-        if (x.val != null) results.offer(prefix.toString());
+        if (x.val != -1 && !results.offer(prefix.toString())) {
+            throw new RuntimeException("Element " + prefix + " was not added!");
+        }
         for (char c = 0; c < R; c++) {
             prefix.append(c);
             collect(x.next[c], prefix, results);
             prefix.deleteCharAt(prefix.length() - 1);
         }
-    }
-
-    void delete(String key) {
-        if (key == null) throw new IllegalArgumentException("argument to delete() is null");
-        root = delete(root, key, 0);
-    }
-
-    private Trie.Node delete(Trie.Node x, String key, int d) {
-        if (x == null) return null;
-        if (d == key.length()) {
-            if (x.val != null) n--;
-            x.val = null;
-        } else {
-            char c = key.charAt(d);
-            x.next[c] = delete(x.next[c], key, d + 1);
-        }
-
-        if (x.val != null) return x;
-        for (int c = 0; c < R; c++)
-            if (x.next[c] != null)
-                return x;
-        return null;
     }
 }
