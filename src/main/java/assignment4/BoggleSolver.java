@@ -56,14 +56,14 @@ public class BoggleSolver {
         if (current == null) {
             return;
         }
-        Trie.Node x = current.getNext()[ch];
+        Trie.Node x = current.getNext(ch);
 
         if (x != null) {
             stack.push(x);
             String newWord = currentWord + ch;
             if (ch == Q) {
                 // noinspection ConstantConditions
-                Trie.Node uNode = stack.peek().getNext()[U];
+                Trie.Node uNode = stack.peek().getNext(U);
                 if (uNode == null) {
                     stack.pop();
                     visited[row * board.cols() + col] = false;

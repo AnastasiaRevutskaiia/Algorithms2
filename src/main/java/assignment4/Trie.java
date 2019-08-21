@@ -1,17 +1,15 @@
 package assignment4;
 
-import java.util.Arrays;
-
 class Trie {
-    private static final int R = 256;
+    private static final int R = 26;
 
     private Trie.Node root;
 
     static class Node {
         private Trie.Node[] next = new Trie.Node[R];
 
-        Node[] getNext() {
-            return Arrays.copyOf(next, next.length);
+        Node getNext(char ch) {
+            return next['A' - ch];
         }
     }
 
@@ -30,7 +28,7 @@ class Trie {
             return x;
         }
         char c = key.charAt(d);
-        x.next[c] = put(x.next[c], key, d + 1);
+        x.next['A' - c] = put(x.getNext(c), key, d + 1);
         return x;
     }
 }
