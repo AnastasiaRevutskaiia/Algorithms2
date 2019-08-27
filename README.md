@@ -72,4 +72,20 @@ Week 4 - Tries and Substring Search
   
   [3]: src/main/resources/assignment4/pins.png ("pins")
   [4]: src/main/resources/assignment4/pines.png ("pines")
+
+Week 5 - Data Compression
+--------------------------------
+- [**BurrowsWheeler.java**](src/main/java/assignment5/BurrowsWheeler.java) - a data type which implements Burrows–Wheeler data compression algorithm. 
   
+[Burrows–Wheeler data compression algorithm](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) is a revolutionary 
+algorithm outcompresses gzip and PKZIP. It forms the basis of the Unix compression utility [bzip2](http://www.bzip.org/). It 
+consists of three algorithmic components, which are applied in succession:
+
+1. Burrows–Wheeler transform. Given a typical English text file, transform it into a text file in which sequences of the same 
+character occur near each other many times.
+2. [Move-to-front encoding](https://en.wikipedia.org/wiki/Move-to-front_transform). Given a text file in which sequences of the 
+same character occur near each other many times, convert it into a text file in which certain characters appear much more 
+frequently than others.
+3. [Huffman compression](https://en.wikipedia.org/wiki/Huffman_coding). Given a text file in which certain characters appear 
+much more frequently than others, compress it by encoding frequently occurring characters with short codewords and infrequently 
+occurring characters with long codewords.d).
