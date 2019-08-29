@@ -88,4 +88,4 @@ same character occur near each other many times, convert it into a text file in 
 frequently than others.
 3. [Huffman compression](https://en.wikipedia.org/wiki/Huffman_coding). Given a text file in which certain characters appear 
 much more frequently than others, compress it by encoding frequently occurring characters with short codewords and infrequently 
-occurring characters with long codewords.d).
+occurring characters with long codewords.
