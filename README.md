@@ -5,7 +5,7 @@ Code for programming assignments in Java from the Coursera course, [Algorithms P
 
 Week 1 - Directed and Undirected Graphs
 --------------------------------
- - [**WordNet.java**](src/main/java/assignment1/WordNet.java) - a semantic lexicon for the English language that is used extensively by computational linguists 
+ - [**WordNet.java**](src/main/java/assignment1/WordNet.java) - a semantic lexicon for English language that is used extensively by computational linguists 
  and cognitive scientists; for example, it was a key component in IBM's [Watson](http://en.wikipedia.org/wiki/Watson_(computer)). 
  
  WordNet groups words into sets of synonyms called *synsets* and describes semantic relationships between them. 
